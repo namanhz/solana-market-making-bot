@@ -1,0 +1,79 @@
+# Solana Market-Making Bot Configuration Example
+# Copy this file to config.yaml and customize for your setup
+
+rpc:
+  endpoints:
+    - "https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_API_KEY"
+    - "https://solana-mainnet.g.alchemy.com/v2/YOUR_ALCHEMY_API_KEY"
+    - "https://rpc.ankr.com/solana"
+  timeout: 30000  # 30 seconds
+  retries: 2
+
+token:
+  mint: "So11111111111111111111111111111111111111112"  # SOL mint (example)
+  symbol: "SOL"
+  decimals: 9
+
+scheduling:
+  mode: "random"  # Options: "random" or "fixed"
+  
+  # For random mode
+  randomInterval:
+    min: 30     # Minimum seconds between trades
+    max: 300    # Maximum seconds between trades
+  
+  # For fixed mode (uncomment and set cron expression)
+  # cron: "0 */5 * * * *"  # Every 5 minutes
+
+wallets:
+  keystoreDir: "./keystore"
+  encryptionKey: "CHANGE_THIS_TO_YOUR_32_BYTE_ENCRYPTION_KEY"
+  minTradeAmount: 0.001  # Minimum 0.001 SOL per trade
+  maxSlippageBps: 100    # Maximum 1% slippage (100 basis points)
+
+dex:
+  primary: "letsbonk"     # Primary DEX: "letsbonk" or "jupiter"
+  fallback: "jupiter"     # Fallback DEX: "letsbonk" or "jupiter"
+  liquidityThreshold: 1000  # Minimum liquidity in USD to use primary DEX
+  
+  letsBonk:
+    apiUrl: "https://api.letsbonk.com"
+  
+  jupiter:
+    apiUrl: "https://quote-api.jup.ag/v6"
+    rateLimit: 10  # Requests per second
+
+monitoring:
+  prometheus:
+    enabled: true
+    port: 9090
+  
+  rest:
+    enabled: true
+    port: 3000
+  
+  logging:
+    level: "info"  # Options: "error", "warn", "info", "debug"
+    file: "./logs/mm-bot.log"
+
+security:
+  memoryZeroing: true
+  keystoreEncryption: "aes-256-gcm"
+
+# Advanced Configuration (Optional)
+advanced:
+  # Maximum number of concurrent trades
+  maxConcurrentTrades: 10
+  
+  # Percentage of available balance to trade
+  tradePercentage: 0.1  # 10%
+  
+  # Risk management
+  maxPercentagePerWallet: 0.3  # 30% max per wallet
+  
+  # Performance tuning
+  balanceUpdateInterval: 15000  # 15 seconds
+  
+  # Error handling
+  maxRetries: 3
+  retryDelay: 1000  # 1 second

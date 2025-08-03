@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "rpc": {
+      "type": "object",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "minItems": 1
+        },
+        "timeout": {
+          "type": "number",
+          "minimum": 1000,
+          "default": 30000
+        },
+        "retries": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5,
+          "default": 2
+        }
+      },
+      "required": ["endpoints"]
+    },
+    "token": {
+      "type": "object",
+      "properties": {
+        "mint": {
+          "type": "string",
+          "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "decimals": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 18
+        }
+      },
+      "required": ["mint"]
+    },
+    "scheduling": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["fixed", "random"]
+        },
+        "cron": {
+          "type": "string"
+        },
+        "randomInterval": {
+          "type": "object",
+          "properties": {
+            "min": {
+              "type": "number",
+              "minimum": 1
+            },
+            "max": {
+              "type": "number",
+              "minimum": 1
+            }
+          },
+          "required": ["min", "max"]
+        }
+      },
+      "required": ["mode"],
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "fixed"
+          }
+        }
+      },
+      "then": {
+        "required": ["cron"]
+      },
+      "else": {
+        "required": ["randomInterval"]
+      }
+    },
+    "wallets": {
+      "type": "object",
+      "properties": {
+        "keystoreDir": {
+          "type": "string"
+        },
+        "encryptionKey": {
+          "type": "string"
+        },
+        "minTradeAmount": {
+          "type": "number",
+          "minimum": 0.001,
+          "default": 0.001
+        },
+        "maxSlippageBps": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 100
+        }
+      },
+      "required": ["keystoreDir", "encryptionKey"]
+    },
+    "dex": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "enum": ["letsbonk", "jupiter"]
+        },
+        "fallback": {
+          "type": "string",
+          "enum": ["letsbonk", "jupiter"]
+        },
+        "liquidityThreshold": {
+          "type": "number",
+          "minimum": 0,
+          "default": 1000
+        },
+        "letsBonk": {
+          "type": "object",
+          "properties": {
+            "apiUrl": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "jupiter": {
+          "type": "object",
+          "properties": {
+            "apiUrl": {
+              "type": "string",
+              "format": "uri"
+            },
+            "rateLimit": {
+              "type": "number",
+              "minimum": 1,
+              "default": 10
+            }
+          }
+        }
+      },
+      "required": ["primary", "fallback"]
+    },
+    "monitoring": {
+      "type": "object",
+      "properties": {
+        "prometheus": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "port": {
+              "type": "number",
+              "minimum": 1024,
+              "maximum": 65535,
+              "default": 9090
+            }
+          }
+        },
+        "rest": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "port": {
+              "type": "number",
+              "minimum": 1024,
+              "maximum": 65535,
+              "default": 3000
+            }
+          }
+        },
+        "logging": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string",
+              "enum": ["error", "warn", "info", "debug"],
+              "default": "info"
+            },
+            "file": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "memoryZeroing": {
+          "type": "boolean",
+          "default": true
+        },
+        "keystoreEncryption": {
+          "type": "string",
+          "enum": ["aes-256-gcm"],
+          "default": "aes-256-gcm"
+        }
+      }
+    }
+  },
+  "required": ["rpc", "token", "scheduling", "wallets", "dex"]
+}

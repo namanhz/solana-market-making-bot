@@ -1,0 +1,50 @@
+rpc:
+  endpoints:
+    - "https://mainnet.helius-rpc.com/?api-key=7bbea6f9-0a65-45a8-9a36-6b11ad91370f"
+    - "https://solana-mainnet.g.alchemy.com/v2/YOUR_API_KEY"
+    - "https://rpc.ankr.com/solana"
+  timeout: 30000
+  retries: 2
+
+token:
+  mint: "So11111111111111111111111111111111111111112"  # SOL (wrapped SOL for mainnet)
+  symbol: "SOL"
+  decimals: 9
+
+scheduling:
+  mode: "random"  # or "fixed"
+  randomInterval:
+    min: 60    # 1 minute minimum
+    max: 300   # 5 minutes maximum
+  # cron: "0 */5 * * * *"  # Every 5 minutes (for fixed mode)
+
+wallets:
+  keystoreDir: "./keystore"
+  encryptionKey: "demo_encryption_key_32_chars_long"
+  minTradeAmount: 0.001  # 0.001 SOL minimum
+  maxSlippageBps: 100    # 1% max slippage
+
+dex:
+  primary: "letsbonk"
+  fallback: "jupiter"
+  liquidityThreshold: 1000  # Minimum liquidity in USD
+  letsBonk:
+    apiUrl: "https://api.letsbonk.com"
+  jupiter:
+    apiUrl: "https://quote-api.jup.ag/v6"
+    rateLimit: 1  # requests per second (Jupiter limit: 60 per minute)
+
+monitoring:
+  prometheus:
+    enabled: true
+    port: 9090
+  rest:
+    enabled: true
+    port: 3000
+  logging:
+    level: "info"
+    file: "./logs/mm-bot.log"
+
+security:
+  memoryZeroing: true
+  keystoreEncryption: "aes-256-gcm"
