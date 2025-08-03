@@ -1,0 +1,9 @@
+{
+  "publicKey": "3wGBFGzPtWrTEENSfmxGu5dzvdA2TRGrwmSSCoLCjLjf",
+  "encryptedPrivateKey": "1b27ec553b3fd26f1618bc65b9a790f6ffbc94e0344eda4406fd70bd963a392639e79a9ffba6acd94a9898a6362d9b0c27ad5fba04ac01fd363fe2d56cc8d909b7c64ee64916eb13df5eaf586b253b78fbccd7ebaac19384fd93bea1e392029d",
+  "salt": "e01cb6386afec98e0cb450a22303947c2896ae51653f997f849abb7e444b6572",
+  "iv": "7e9d57ceddc5babf3ea83f1dc407d16e",
+  "type": "buy-only",
+  "active": true,
+  "createdAt": "2025-07-31T15:19:15.996Z"
+}

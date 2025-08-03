@@ -1,0 +1,9 @@
+{
+  "publicKey": "DfvCBNMi2BLPKpjHG5swqm8HvDkqNu4rZMQsL32M6qbs",
+  "encryptedPrivateKey": "fe40667dcba0f2f0e8b977df7b0988b992aba85ed0a1333658889bdcbf9c53ed5a73f7e601ca5fc073af8be824ab7a9944c151e13cd75abab82583fef95f41db0b0fb89b027622ef2bafd0465b11f0db4c1ffcfb65041afe2fa2287805744beb",
+  "salt": "ebb8aaed6e581a24c07365fd37e8d462889cf6f81c0df855c11463da24922729",
+  "iv": "1198fae3be3e3a4bc513b33f37f257fd",
+  "type": "buy-only",
+  "active": true,
+  "createdAt": "2025-07-31T15:19:16.082Z"
+}

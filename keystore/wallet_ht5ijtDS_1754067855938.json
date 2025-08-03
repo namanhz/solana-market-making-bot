@@ -1,0 +1,9 @@
+{
+  "publicKey": "ht5ijtDSoH7Cxczc5NZXusUrvKe51veq9VQ89Wb9ucn",
+  "encryptedPrivateKey": "6238de38c4883a1505615fb683c3da6d8e086f395ded6d3c3314ff2aa12c3628e03fcf8dcec83a4739e03275930ac0ee7d80c1e5e5bef5b010a57048b6d47f67862978a9034dc29856b98ed1cde09aac2b8aaec4cbf782cf40acc3b9351e8357",
+  "salt": "b4e390ff8b12c21271a71921b28623aa0ef6d586a738822c0611b838501e1e93",
+  "iv": "c81e3184752dc82f295f009ee9f971f0",
+  "type": "sell-only",
+  "active": true,
+  "createdAt": "2025-08-01T17:04:15.938Z"
+}
